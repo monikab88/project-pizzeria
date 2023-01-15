@@ -68,8 +68,12 @@
     },
 
     initMenu: function(){
-      const testProduct = new Product();
-      console.log('testProduct:', testProduct);
+      const thisApp = this;
+      console.log('thisApp.data:',thisApp.data);
+
+      for(let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
     },
 
     init: function(){
