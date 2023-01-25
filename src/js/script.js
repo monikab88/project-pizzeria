@@ -62,6 +62,8 @@
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
       
       console.log('new Product:', thisProduct);
     }
@@ -101,6 +103,7 @@
 
       /* START: add event listener to clickable trigger on event click */
       //clickableTrigger.addEventListener('click', function(event) {
+      
       thisProduct.accordionTrigger.addEventListener('click', function(event) {
         
         /* prevent default action for event */
@@ -119,7 +122,21 @@
    
       });
     }
+
+    initOrderForm(){
+      const thisProduct = this;
+
+      console.log(initOrderForm);
+    }
+
+    processOrder(){
+      const thisProduct = this;
+
+      console.log(processOrder);
+    }
+
   }
+  
   
   const app = {
     initData: function(){
