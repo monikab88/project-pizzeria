@@ -147,6 +147,8 @@
     processOrder(){
       const thisProduct = this;
 
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData', formData);
       
     }
 
