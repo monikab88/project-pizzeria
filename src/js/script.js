@@ -93,6 +93,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector (select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -166,10 +167,10 @@
           const option = param.options[optionId];
           console.log(optionId, option);
         
-      
-   
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
           // check if there is param with a name of paramId in formData and if it includes optionId
-          if(formData[paramId] && formData[paramId].includes(optionId)) {
+          if(optionSelected) {
             // check if the option is not default
             if(!option.default) {
               // add option price to price variable
@@ -180,6 +181,16 @@
             if(!option.default) {
               // reduce price variable
               price -= option.price;
+            }
+          }
+
+          const optionImage = thisProduct.imageWrapper.querySelector ('.' + paramId + '-' + optionId);
+          
+          if(optionImage) {
+            if(optionSelected) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
           // update calculated price in the HTML
