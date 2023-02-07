@@ -172,6 +172,7 @@
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(optionSelected) {
             // check if the option is not default
+            console.log(option.default);
             if(option.default != true) {
               // add option price to price variable
               price += option.price;

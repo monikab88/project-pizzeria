@@ -179,8 +179,8 @@
           // check if the option is default
           } else if (option.default == true) {
           // reduce price variable
-          price -= option.price;
-        }
+            price -= option.price;
+          }
         
           const optionImage = thisProduct.imageWrapper.querySelector ('.' + paramId + '-' + optionId);
           
