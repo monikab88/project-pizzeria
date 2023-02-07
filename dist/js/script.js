@@ -134,7 +134,7 @@
       
       for(let input of thisProduct.formInputs){
         input.addEventListener('change', function(){
-          thisProduct.processOrder();
+        thisProduct.processOrder();
         });
       }
       

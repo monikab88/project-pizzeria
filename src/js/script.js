@@ -172,17 +172,16 @@
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(optionSelected) {
             // check if the option is not default
-            if(!option.default) {
+            if(option.default != true) {
               // add option price to price variable
               price += option.price;
             }
-          } else {
-            // check if the option is default
-            if(!option.default) {
+          // check if the option is default
+          } else if (option.default == true) {
               // reduce price variable
               price -= option.price;
             }
-          }
+        
 
           const optionImage = thisProduct.imageWrapper.querySelector ('.' + paramId + '-' + optionId);
           
