@@ -196,7 +196,7 @@
           }
           // multiply price by amount
           price *= thisProduct.amountWidget.value;
-          
+
           // update calculated price in the HTML
           thisProduct.priceElem.innerHTML = price;
         }
@@ -247,7 +247,7 @@
         thisWidget.value = newValue;
       }
       if(thisWidget.value < minValue) {
-        thisWidget.value = minValue - 1;
+        thisWidget.value = minValue;
       }
       if(thisWidget.value > maxValue) {
         thisWidget.value = maxValue + 1;
