@@ -92,9 +92,6 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      
-      
-      console.log('new Product:', thisProduct);
     }
 
     renderInMenu(){
@@ -181,7 +178,6 @@
 
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
 
       // set price to default price
       let price = thisProduct.data.price;
@@ -190,20 +186,17 @@
       for(let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
-
+        
         // for every option in this category
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
         
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(optionSelected) {
             // check if the option is not default
-            console.log(option.default);
             if(option.default != true) {
               // add option price to price variable
               price += option.price;
@@ -269,14 +262,12 @@
 
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
 
       const params = {};
       // for every category (param)...
       for(let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
         // create category param in params const eg. params = { ingredients: { name: 'Ingredients', options: {}}}
         params[paramId] = {
           label: param.label,
@@ -286,7 +277,6 @@
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
         
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
@@ -307,9 +297,6 @@
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions (thisWidget.value);
-
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
     }
 
     getElements(element){
@@ -375,8 +362,6 @@
 
       thisCart.getElements(element);
       thisCart.initActions();
-
-      console.log('new Cart', thisCart);
     }
 
     getElements(element){
@@ -387,6 +372,7 @@
       thisCart.dom.wrapper = element,
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      
     }
 
     initActions(){
@@ -409,11 +395,36 @@
       /*add element to menu*/
       thisCart.dom.productList.appendChild(generatedDOM);
 
-      console.log('adding product', menuProduct);
-
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('thisCart.products', thisCart.products);
 
+      thisCart.update();
+
+    }
+
+    update(){
+      const thisCart = this;
+
+      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+      
+      for (let product of thisCart.products) {
+        totalNumber += product.amount;
+        subtotalPrice += product.price;
+      }
+
+      if (totalNumber != 0){
+        thisCart.totalPrice = subtotalPrice + deliveryFee;
+        thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      }
+      
+      thisCart.dom.totalNumber.innerHTML = totalNumber;
+      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+
+
+      for (let price of thisCart.dom.totalPrice){
+        price.innerHTML = thisCart.totalPrice;
+      }
     }
     
   }
@@ -430,8 +441,6 @@
 
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
-
-      console.log(thisCartProduct);
     }
     
     getElements(element){
@@ -461,7 +470,6 @@
   const app = {
     initMenu: function(){
       const thisApp = this;
-      console.log('thisApp.data:',thisApp.data);
 
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
@@ -483,12 +491,7 @@
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
-      
+           
       thisApp.initData();
       thisApp.initMenu();
       thisApp.initCart();
