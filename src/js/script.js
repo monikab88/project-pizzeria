@@ -391,7 +391,12 @@
       thisCart.dom.productList.addEventListener('updated', function(){
         thisCart.update();
       });
+      
+      thisCart.dom.productList.addEventListener('remove', function(event){
+        thisCart.remove(event.detail.cartProduct);
+      });
     }
+
     add(menuProduct){
       // const thisCart = this;
       const thisCart = this;
@@ -436,8 +441,19 @@
         price.innerHTML = thisCart.totalPrice;
       }
     }
-    
+
+    remove(event){
+      const thisCart = this;
+
+      event.dom.wrapper.remove();
+
+      const productsRemove = thisCart.products.indexOf(event);
+      thisCart.products.splice(productsRemove, 1);
+
+      thisCart.update();
+    }
   }
+  
   class CartProduct{
     constructor(menuProduct, element){
       const thisCartProduct = this;
@@ -486,8 +502,7 @@
           cartProduct: thisCartProduct,
         },
       });
-      console.log (remove);
-
+      
       thisCartProduct.dom.wrapper.dispatchEvent(event);
     }
 
