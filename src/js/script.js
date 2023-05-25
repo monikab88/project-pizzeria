@@ -431,6 +431,9 @@
       if (totalNumber != 0){
         thisCart.totalPrice = subtotalPrice + deliveryFee;
         thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      } else {
+        thisCart.totalPrice = 0;
+        thisCart.dom.deliveryFee.innerHTML = 0;
       }
       
       thisCart.dom.totalNumber.innerHTML = totalNumber;
@@ -453,7 +456,7 @@
       thisCart.update();
     }
   }
-  
+
   class CartProduct{
     constructor(menuProduct, element){
       const thisCartProduct = this;
