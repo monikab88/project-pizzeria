@@ -482,7 +482,7 @@
         totalNumber: thisCart.totalNumber,
         deliveryFee: thisCart.dom.deliveryFee,
         products: [],
-      }
+      };
 
       for(let prod of thisCart.products) {
         payload.products.push(prod.getData());
