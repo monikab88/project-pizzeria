@@ -1,5 +1,4 @@
 import {select, templates} from '../settings.js';
-import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 
 class Booking{
@@ -27,8 +26,6 @@ class Booking{
     const thisBooking = this;
   
     thisBooking.peopleAmounElem = new AmountWidget(thisBooking.dom.peopleAmount);
-    
-  
     thisBooking.dom.peopleAmount.addEventListener('updated', function(){
   
     }); 
