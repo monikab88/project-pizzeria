@@ -1,4 +1,4 @@
-import {select, templates} from '../settings.js';
+import {select, templates, settings} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from '../components/DatePicker.js';
 import HourPicker from '../components/HourPicker.js';
@@ -9,8 +9,35 @@ class Booking{
   
     thisBooking.render(element);
     thisBooking.initWidgets();
+    thisBooking.getData();
   }
   
+  getData(){
+    const thisBooking = this;
+
+    const params = {
+      booking:[
+
+      ],
+      eventsCurrent: [
+
+      ],
+      eventsRepeat: [
+
+      ],
+    };
+
+    console.log('getData params', params);
+
+    const urls = {
+      booking:            settings.db.url + '/' + settings.db.booking 
+                          + '?' + params.booking.join ('&'),
+      eventsCurrent:      settings.db.url + '/' + settings.db.event   
+                          + '?' + params.eventsCurrent.join ('&'),
+      eventsRepeat:       settings.db.url + '/' + settings.db.booking 
+                          + '?' + params.eventsRepeat.join ('&'),
+    };
+  }
   render(element){
     const thisBooking = this;
   
@@ -39,6 +66,6 @@ class Booking{
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePickerInput);
     thisBooking.hourPickerPicker = new HourPicker(thisBooking.dom.hourPickerInput);
   }
-};
+}
 
 export default Booking;
