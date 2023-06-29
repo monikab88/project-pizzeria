@@ -17,7 +17,8 @@ class Booking{
 
     const params = {
       booking:[
-
+        'abc=xyz',
+        'lorem=ipsum',
       ],
       eventsCurrent: [
 
@@ -37,6 +38,9 @@ class Booking{
       eventsRepeat:       settings.db.url + '/' + settings.db.booking 
                           + '?' + params.eventsRepeat.join ('&'),
     };
+
+    console.log('getData urls', urls);
+
   }
   render(element){
     const thisBooking = this;
